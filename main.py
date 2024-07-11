@@ -117,7 +117,7 @@ if __name__ == "__main__":
     """, unsafe_allow_html=True)
 
     # タイトルとサイトリンクの表示
-    st.title("記事要約アプリ")
+    st.title("SUMAPP")
     st.markdown("<h3>記事をスクレイピングできるサンプルサイト: <a href='https://www.bloomberg.co.jp/'>Bloomberg</a></h3>", unsafe_allow_html=True)
 
     # 記事URLの入力ウィジェット
