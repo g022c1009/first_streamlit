@@ -1,8 +1,14 @@
 [theme]
 base = "dark"
-primaryColor = "#1a73e8"
-backgroundColor = "#000000"
-secondaryBackgroundColor = "#111111"
+primaryColor = "#f50057"
+backgroundColor = "#1e1e1e"
+secondaryBackgroundColor = "#292929"
 textColor = "#e0e0e0"
-font = "sans serif"
+font = "monospace"
 
+[server]
+headless = true
+enableCORS = false
+
+[global]
+minBrowser = "chrome:70"
