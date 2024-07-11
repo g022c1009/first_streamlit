@@ -62,7 +62,7 @@ def summarize_text(text):
 
 if __name__ == "__main__":
     # Streamlitページの設定
-    st.set_page_config(page_title="記事要約アプリ", page_icon="📰", layout="wide", initial_sidebar_state="expanded")
+    st.set_page_config(page_title="SUMAPP", page_icon="📰", layout="wide", initial_sidebar_state="expanded")
 
     # カスタムCSSの適用
     st.markdown("""
