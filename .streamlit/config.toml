@@ -1,7 +1,60 @@
 [theme]
 base = "dark"
-primaryColor = "#ff5722"
-backgroundColor = "#1e1e1e"
-secondaryBackgroundColor = "#333333"
-textColor = "#ffffff"
-font = "serif"
+primaryColor = "#FF69B4"  # 鮮やかなピンクでアクセント
+backgroundColor = "#121212"  # よりダークな背景色
+secondaryBackgroundColor = "#1E1E1E"  # サイドバーの背景色
+textColor = "#EAEAEA"  # 少し柔らかい白
+font = "sans serif"  # 洗練されたサンセリフ体
+
+[server]
+headless = true
+enableCORS = false
+
+[global]
+minBrowser = "chrome:70"
+
+# 追加のカスタムCSSを設定
+[theme.custom_css]
+css = """
+/* 全体のフォントとボーダーを設定 */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #EAEAEA;
+}
+
+/* 入力フィールドのスタイルを設定 */
+input[type="text"] {
+    background-color: #1E1E1E;
+    color: #EAEAEA;
+    padding: 10px;
+    border: 1px solid #FF69B4;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
+}
+
+/* ボタンのスタイルを設定 */
+button {
+    background-color: #FF69B4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: #FF1493;
+    box-shadow: 0 0 15px rgba(255, 20, 147, 0.6);
+}
+
+/* サイドバーのスタイルを設定 */
+.sidebar .stMarkdown {
+    background-color: #1E1E1E;
+    color: #EAEAEA;
+    border: 1px solid #FF69B4;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
+}
+"""
