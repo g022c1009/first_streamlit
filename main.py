@@ -6,8 +6,7 @@ import time
 from cachetools import TTLCache
 import os
 
-# OpenAIのAPIキーを設定
-openai.api_key = os.getenv('OPENAI_API_KEY')
+openai.api_key = openai.api_key = os.getenv('OPENAI_API_KEY')  # APIキーを設定する
 
 # キャッシュの設定: URLごとに最大100件、1時間のTTL
 cache = TTLCache(maxsize=100, ttl=3600)
@@ -61,19 +60,13 @@ def summarize_text(text):
     return response.choices[0].message.content
 
 if __name__ == "__main__":
-    # Streamlitページの設定
-    st.set_page_config(page_title="記事要約アプリ", page_icon="📰", layout="wide", initial_sidebar_state="expanded")
+    st.set_page_config(page_title="記事要約アプリ", page_icon="📰", layout="wide")
 
-    # タイトルとサイトリンクの表示
     st.title("記事要約アプリ")
-    st.markdown("<h3 style='text-align: center; color: #ffffff;'>記事をスクレイピングできるサンプルサイト: <a style='color: #1a73e8;' href='https://www.bloomberg.co.jp/'>Bloomberg</a></h3>", unsafe_allow_html=True)
-
-    # 記事URLの入力ウィジェット
+    st.write("記事をスクレイピングできるサンプルサイト: [Bloomberg](https://www.bloomberg.co.jp/)")
+    
     url = st.text_input("記事のURLを入力してください:")
-    url = url.strip()  # 入力の両端の空白を削除
-
-    # 「記事を要約する」ボタンの処理
-    if st.button("記事を要約する", key="summarize_button"):
+    if st.button("記事を要約する"):
         if url:
             my_bar = st.progress(0)
             article_text = scrape_article(url)
@@ -88,41 +81,10 @@ if __name__ == "__main__":
                 my_bar.empty()
         else:
             st.warning("URLを入力してください。")
-
-    # サイドバーに情報を表示
+    
     st.sidebar.title("情報")
-    st.sidebar.markdown("""
-    このアプリは様々なサイトから記事をスクレイピングし、chatGPTを使って要約します。\n
-    URLを入力し、「記事を要約する」ボタンを押してください。\n
-    また、記事をスクレイピングする前に、そのサイトがスクレイピングを許可していることを確認してください。
-    """)
-
-    # CSSのカスタマイズ
-    st.markdown("""
-    <style>
-        .stTextInput {
-            background-color: #333333;
-            color: #ffffff;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-        }
-        .stButton>button {
-            background-color: #1a73e8;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-        }
-        .stProgress>div>div {
-            background-color: #1a73e8;
-        }
-        .stSidebar .stMarkdown {
-            padding: 10px;
-            background-color: #333333;
-            color: #ffffff;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-        }
-    </style>
-    """, unsafe_allow_html=True)
+    st.sidebar.info(
+        "このアプリは様々なサイトから記事をスクレイピングし、chatGPTを使って要約します。\n"
+        "URLを入力し、「記事を要約する」ボタンを押してください。\n"
+        "また、記事をスクレイピングする前に、そのサイトがスクレイピングを許可していることを確認してください。"
+    )
