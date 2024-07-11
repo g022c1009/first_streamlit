@@ -1,10 +1,10 @@
 [theme]
 base = "dark"
-primaryColor = "#FF69B4"  # 鮮やかなピンクでアクセント
-backgroundColor = "#121212"  # よりダークな背景色
-secondaryBackgroundColor = "#1E1E1E"  # サイドバーの背景色
-textColor = "#EAEAEA"  # 少し柔らかい白
-font = "sans serif"  # 洗練されたサンセリフ体
+primaryColor = "#ff6f61"  # 鮮やかなサーモンピンク
+backgroundColor = "#2e2e2e"  # ダークグレーの背景色
+secondaryBackgroundColor = "#383838"  # サイドバーの背景色
+textColor = "#ffffff"  # ホワイト
+font = "monospace"  # モノスペースフォントで個性を演出
 
 [server]
 headless = true
@@ -18,43 +18,70 @@ minBrowser = "chrome:70"
 css = """
 /* 全体のフォントとボーダーを設定 */
 body {
-    font-family: 'Helvetica Neue', sans-serif;
-    color: #EAEAEA;
+    font-family: 'Courier New', monospace;
+    color: #ffffff;
 }
 
 /* 入力フィールドのスタイルを設定 */
 input[type="text"] {
-    background-color: #1E1E1E;
-    color: #EAEAEA;
-    padding: 10px;
-    border: 1px solid #FF69B4;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
+    background-color: #3c3c3c;
+    color: #ffffff;
+    padding: 12px;
+    border: 2px solid #ff6f61;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255, 111, 97, 0.4);
 }
 
 /* ボタンのスタイルを設定 */
 button {
-    background-color: #FF69B4;
+    background-color: #ff6f61;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 25px;
     border: none;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255, 111, 97, 0.6);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
-    background-color: #FF1493;
-    box-shadow: 0 0 15px rgba(255, 20, 147, 0.6);
+    background-color: #ff5349;
+    box-shadow: 0 0 20px rgba(255, 83, 73, 0.8);
 }
 
 /* サイドバーのスタイルを設定 */
 .sidebar .stMarkdown {
-    background-color: #1E1E1E;
-    color: #EAEAEA;
-    border: 1px solid #FF69B4;
-    border-radius: 5px;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
+    background-color: #3c3c3c;
+    color: #ffffff;
+    border: 2px solid #ff6f61;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(255, 111, 97, 0.4);
+}
+
+/* ヘッダーとリンクのスタイルを設定 */
+h3, h1, h2, a {
+    color: #ff6f61;
+    text-shadow: 1px 1px 2px rgba(255, 111, 97, 0.7);
+}
+
+/* プログレスバーのスタイルを設定 */
+.stProgress > div > div {
+    background-color: #ff6f61;
+    box-shadow: 0 0 15px rgba(255, 111, 97, 0.6);
+}
+
+/* カスタムスクロールバー */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #3c3c3c;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ff6f61;
+    border-radius: 6px;
+    border: 3px solid #3c3c3c;
 }
 """
