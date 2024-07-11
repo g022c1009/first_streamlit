@@ -1,2 +1,6 @@
 [theme]
-backgroundColor="#FFFFFF"
+primaryColor = "#00FFFF"
+backgroundColor = "#000000"
+secondaryBackgroundColor = "#2F4F4F"
+textColor = "#00CED1"
+font = "Verdana"
