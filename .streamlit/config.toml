@@ -16,9 +16,16 @@ minBrowser = "chrome:70"
 # 追加のカスタムCSSを設定
 [theme.custom_css]
 css = """
+/* Google Fontsの読み込み */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
 /* 全体のフォントとボーダーを設定 */
 body {
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: 'Roboto', sans-serif; /* ここで使用するフォントを選んでください */
     color: #EAEAEA;
 }
 
