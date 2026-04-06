@@ -40,11 +40,28 @@ def scrape_article(url):
 
     soup = BeautifulSoup(response.content, 'html.parser')
     article_text = ""
+    # 1. articleタグ内のpタグを優先
     article = soup.find('article')
     if article:
         paragraphs = article.find_all('p')
     else:
-        paragraphs = soup.find_all('p')
+        # 2. mainタグ内のpタグ
+        main = soup.find('main')
+        if main:
+            paragraphs = main.find_all('p')
+        else:
+            # 3. sectionタグ内のpタグ
+            section = soup.find('section')
+            if section:
+                paragraphs = section.find_all('p')
+            else:
+                # 4. bodyタグ内のpタグ
+                body = soup.find('body')
+                if body:
+                    paragraphs = body.find_all('p')
+                else:
+                    # 5. fallback: 全pタグ
+                    paragraphs = soup.find_all('p')
 
     # pタグのテキストを連結して本文を作成
     article_text = '\n'.join([p.get_text(strip=True) for p in paragraphs if p.get_text(strip=True)])
