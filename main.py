@@ -39,32 +39,63 @@ def scrape_article(url):
         return None
 
     soup = BeautifulSoup(response.content, 'html.parser')
+
+
     article_text = ""
-    # 1. articleタグ内のpタグを優先
-    article = soup.find('article')
-    if article:
-        paragraphs = article.find_all('p')
+    # 0. data-testid="paragraph-" で始まるdivを優先
+    paragraph_divs = soup.find_all("div", attrs={"data-testid": lambda v: v and v.startswith("paragraph-")})
+    if paragraph_divs:
+        article_text = '\n'.join([div.get_text(strip=True) for div in paragraph_divs if div.get_text(strip=True)])
     else:
-        # 2. mainタグ内のpタグ
-        main = soup.find('main')
-        if main:
-            paragraphs = main.find_all('p')
-        else:
-            # 3. sectionタグ内のpタグ
+        # 1. reuters記事本文のよくあるクラス名を優先
+        body_classes = [
+            "article-body", "article__body", "article-body__content", "ArticleBody__content__"  # 末尾ワイルドカード用
+        ]
+        paragraphs = []
+        for class_name in body_classes:
+            # 完全一致
+            div = soup.find("div", class_=class_name)
+            if div:
+                paragraphs = div.find_all('p')
+                break
+            # 前方一致（例: ArticleBody__content__xxxx）
+            divs = soup.find_all("div", class_=lambda x: x and x.startswith(class_name))
+            if divs:
+                for d in divs:
+                    paragraphs += d.find_all('p')
+                if paragraphs:
+                    break
+
+        # 2. articleタグ内のpタグ
+        if not paragraphs:
+            article = soup.find('article')
+            if article:
+                paragraphs = article.find_all('p')
+
+        # 3. mainタグ内のpタグ
+        if not paragraphs:
+            main = soup.find('main')
+            if main:
+                paragraphs = main.find_all('p')
+
+        # 4. sectionタグ内のpタグ
+        if not paragraphs:
             section = soup.find('section')
             if section:
                 paragraphs = section.find_all('p')
-            else:
-                # 4. bodyタグ内のpタグ
-                body = soup.find('body')
-                if body:
-                    paragraphs = body.find_all('p')
-                else:
-                    # 5. fallback: 全pタグ
-                    paragraphs = soup.find_all('p')
 
-    # pタグのテキストを連結して本文を作成
-    article_text = '\n'.join([p.get_text(strip=True) for p in paragraphs if p.get_text(strip=True)])
+        # 5. bodyタグ内のpタグ
+        if not paragraphs:
+            body = soup.find('body')
+            if body:
+                paragraphs = body.find_all('p')
+
+        # 6. fallback: 全pタグ
+        if not paragraphs:
+            paragraphs = soup.find_all('p')
+
+        # pタグのテキストを連結して本文を作成
+        article_text = '\n'.join([p.get_text(strip=True) for p in paragraphs if p.get_text(strip=True)])
 
     cache[url] = article_text
     request_times.append(time.time())
