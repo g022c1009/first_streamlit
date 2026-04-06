@@ -121,7 +121,7 @@ if __name__ == "__main__":
 
     # タイトルとサイトリンクの表示
     st.title("SUMAPP")
-    st.markdown("<h3><a href='https://www.bloomberg.co.jp/'>Bloomberg</a></h3>", unsafe_allow_html=True)
+    st.markdown("<h3><a href='https://jp.reuters.com/'>reuters</a></h3>", unsafe_allow_html=True)
 
     # 記事URLの入力ウィジェット
     url = st.text_input("記事のURLを入力してください:")
