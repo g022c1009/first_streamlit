@@ -135,6 +135,10 @@ if __name__ == "__main__":
         if url:
             my_bar = st.progress(0)
             article_text = scrape_article(url)
+            # 取得した記事本文をコンソールに出力
+            print("===== 記事本文（コンソール出力） =====")
+            print(article_text)
+            print("===== 記事本文ここまで =====")
             my_bar.progress(30)
             if article_text:
                 article_summary = summarize_text(article_text)
