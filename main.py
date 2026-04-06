@@ -40,8 +40,11 @@ def scrape_article(url):
 
     soup = BeautifulSoup(response.content, 'html.parser')
     article_text = ""
-    for p in soup.find_all('p'):
-        article_text += p.get_text()
+    article = soup.find('article')
+    if article:
+        paragraphs = article.find_all('p')
+    else:
+        paragraphs = soup.find_all('p')
 
     cache[url] = article_text
     request_times.append(time.time())
@@ -118,7 +121,7 @@ if __name__ == "__main__":
 
     # タイトルとサイトリンクの表示
     st.title("SUMAPP")
-    st.markdown("<h3>記事のスクレイピングが許可されているサンプルサイト: <a href='https://www.bloomberg.co.jp/'>Bloomberg</a></h3>", unsafe_allow_html=True)
+    st.markdown("<h3><a href='https://www.bloomberg.co.jp/'>Bloomberg</a></h3>", unsafe_allow_html=True)
 
     # 記事URLの入力ウィジェット
     url = st.text_input("記事のURLを入力してください:")
