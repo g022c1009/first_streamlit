@@ -46,6 +46,9 @@ def scrape_article(url):
     else:
         paragraphs = soup.find_all('p')
 
+    # pタグのテキストを連結して本文を作成
+    article_text = '\n'.join([p.get_text(strip=True) for p in paragraphs if p.get_text(strip=True)])
+
     cache[url] = article_text
     request_times.append(time.time())
     return article_text
